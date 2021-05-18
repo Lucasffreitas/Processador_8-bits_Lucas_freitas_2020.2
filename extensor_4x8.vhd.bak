@@ -1,0 +1,16 @@
+library IEEE;
+use IEEE.std_logic_1164.ALL;
+
+entity extensor_4x8 is
+    Port(
+           input_ext4 : in  std_logic_vector(3 downto 0);
+           output_ext4: out std_logic_vector(7 downto 0)
+			);
+end extensor_2x8;
+
+architecture modelo_extensor_4x8 of extensor_4x8 is
+begin
+	
+	output_ext2 <= "000000" & input_ext4;
+	
+end modelo_extensor_4x8;
