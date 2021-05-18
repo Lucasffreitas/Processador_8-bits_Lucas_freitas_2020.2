@@ -1,0 +1,17 @@
+library ieee;
+use ieee.std_logic_1164.all
+
+entity somador is 
+port(
+	clock_somador :in std_logic;
+	input_somador : in std_logic_vector(7 downto 0);
+	output_somador: out std_logic_vector(7 downto 0)
+);
+
+architecture modelo_somador of somador is
+begin
+	process(clock_somador)
+		begin
+			output_somador <= '00000001' + input_somador;
+	end process;
+end modelo_somador;

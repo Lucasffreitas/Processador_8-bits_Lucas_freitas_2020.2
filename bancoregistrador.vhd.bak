@@ -1,0 +1,33 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+
+entity bancoregistrador is
+	port(
+	clock_reg = in std_logic;
+	write_reg = in std_logic;
+	data_reg = in std_logic_vector ( 7 DOWNTO  0 );
+	input_reg_1 = in std_logic_vector ( 1  DOWNTO  0 );
+	input_reg_2  = in std_logic_vector ( 1  DOWNTO  0 );
+	output_reg_1 = out std_logic_vector ( 7  DOWNTO  0 );
+	output_reg_1 = out std_logic_vector ( 7  DOWNTO  0 );
+	);
+end bancoregistrador;
+
+architecture modelo_registrador of bancoregistrador is
+type type_registrado is array (3 downto 0) of std_logic_vector(7 downto 0);
+signal registrador: type_registrado;
+begin
+	process(clock_reg, Write_reg, input_reg_1, input_reg_2, data_reg)
+	begin
+		if( rising_edge(clock_reg) ) then
+			if( Write_reg = '1' ) then
+				registrador(to_integer(unsigned(input_reg_1))) <= data_reg;
+			else
+				output_reg_1 <= registrador(to_integer(unsigned(input_reg_1)));
+				output_reg_2 <= registrador(to_integer(unsigned(input_reg_2)));
+			end if;
+		end if;
+	end process;
+end modelo_registrado;

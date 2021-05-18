@@ -1,0 +1,29 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity memoriadados is
+	port(
+			clock_md    : in std_logic;
+			MemWrite_md : in std_logic;
+			endereco_md : in std_logic_vector (1 downto 0);
+			input_md    : in std_logic_vector (7 downto 0);
+			output_md   : out std_logic_vector(7 downto 0)
+		  );
+end memoriadados;
+
+architecture modelo_md of memoriadados is
+type memoriadedados is array (3 downto 0) of std_logic_vector(7 downto 0);
+signal memoria: memoriadedados;
+begin
+	process(clock_md, MemWrite_md, endereco_md, input_md)
+	begin
+		if( rising_edge(clock_md) ) then
+			if( MemWrite_md = '0' ) then
+				output_md <= memoria(to_integer(unsigned(endereco_md)));
+			else
+				memoria(to_integer(unsigned(endereco_md))) <= input_md;
+			end if;
+		end if;
+	end process;
+end modelo_md;
