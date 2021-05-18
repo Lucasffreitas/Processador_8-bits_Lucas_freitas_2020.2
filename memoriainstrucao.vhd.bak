@@ -1,0 +1,36 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.std_logic_arith.all;
+use IEEE.std_logic_unsigned.all;
+
+entity memoriainstrucao is
+	port (
+			clock_mi : in  std_logic;
+			input_mi : in  std_logic_vector(7 downto 0);
+			output_mi: out std_logic_vector(7 downto 0)
+			);
+end memoriainstrucao;
+
+architecture modelo_mi of memoriainstrucao is
+	type memoriadeinstrucao is array (0 to 255) of std_logic_vector(7 downto 0);
+	constant memoria : memoriadeinstrucao := (
+		1 => "10010011",  
+		2 => "00010011",  
+		3 => "00010011",  
+		4 => "00010001",  
+		5 => "10010111",  
+		6 => "00010110",  
+		7 => "10011011",  
+		8 => "00000010",  
+		9 => "00110101", 
+	   10 => "01110100", 
+		11 => "11010111",
+		OTHERS => "00000000" );
+begin
+	process(clock_mi, input_mi)
+	begin
+		if( rising_edge(clock_mi) ) then
+			output_mi <= memoria(conv_integer(input_mi));
+		end if;
+	end process;	
+end modelo_mi;

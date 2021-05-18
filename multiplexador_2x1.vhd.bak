@@ -1,0 +1,22 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity multiplexador_2x1 is
+port(
+	in_port: in  std_logic ;
+   input_1: in  std_logic_vector ( 7  downto  0 );
+   input_2: in  std_logic_vector ( 7  downto  0 );
+   output_port: out  std_logic_vector ( 7  downto  0 )
+);
+end multiplexador_2x1;
+
+architecture modelo_multiplexador of multiplexador_2x1 is
+begin
+	process(in_port, input_1, input_2)
+	begin
+		case in_port is
+			when '0' => output <= input_1;
+			when '1' => output <= input_2;
+		end case;
+	end process;
+end modelo_multiplexador;
